@@ -26,6 +26,7 @@ class Stack
         tos = -1 ;
     }
 
+    // Time : O(1)
     void push(int item)
     {
         if(isFull())
@@ -38,6 +39,7 @@ class Stack
         arr[tos] = item ;
     }
 
+    // O(1)
     int pop()
     {
         if(isEmpty())
@@ -53,27 +55,38 @@ class Stack
         return temp ; 
     }
 
+    // O(1)
     int peek()
     {
+        if(isEmpty())
+        {
+            cout << "Stack is Empty."  << endl;
+            return INT_MIN;
+        }
+
         int temp = arr[tos] ;
         return temp ;         
     }
 
+    // O(1)
     int size()
     {
         return tos + 1 ;
     }
 
+    // O(1)
     bool isEmpty()
     {
         return size() == 0 ;
     }
 
+    // O(1)
     bool isFull()
     {
         return size() == total ;
     }
 
+    // O(n)
     void display()
     {
         cout << "-------------------" << endl ;
