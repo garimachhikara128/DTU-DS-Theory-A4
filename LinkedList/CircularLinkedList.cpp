@@ -2,7 +2,7 @@
 
 using namespace std ;
 
-class LinkedList
+class CircularLinkedList
 {
     class Node
     {
@@ -27,13 +27,18 @@ class LinkedList
     {
         cout << "-------------------" << endl ;
 
-        Node *temp = head ; // i = 0 
-
-        while(temp != NULL) // i < n
+        if(head != NULL)
         {
-            cout << temp->data << endl ; // arr[i]
-            temp = temp->next ; // i++ 
+            Node *temp = head ; 
+
+            do
+            {
+                cout << temp->data << endl ; 
+                temp = temp->next ; 
+            }
+            while(temp != head) ;
         }
+
         cout << "-------------------" << endl ;
 
     }
@@ -41,12 +46,17 @@ class LinkedList
     int size()
     {
         int count = 0 ;
-        Node *temp = head ; 
-
-        while(temp != NULL) 
+        
+        if(head != NULL)
         {
-            count++ ;
-            temp = temp->next ;
+            Node *temp = head ; 
+
+            do
+            {
+                count ++ ;
+                temp = temp->next ; 
+            }
+            while(temp != head) ;
         }
 
         return count ;
@@ -129,6 +139,9 @@ class LinkedList
         {
             head = nn ;
             tail = nn ;
+
+            // cll
+            tail->next = head ;
         }
         else
         {
@@ -137,6 +150,9 @@ class LinkedList
 
             // updation of data members
             tail = nn ;
+
+            // cll
+            tail->next = head ;
         }
     }
 
@@ -149,6 +165,9 @@ class LinkedList
         {
             head = nn ;
             tail = nn ;
+
+            // cll
+            tail->next = head ;
         }
         else
         {
@@ -157,6 +176,9 @@ class LinkedList
 
             // updation of data members
             head = nn ;
+
+            // cll
+            tail->next = head ;
         }
     
     }
@@ -221,6 +243,9 @@ class LinkedList
             // data members
             tail = newlast ;
 
+            // cll
+            tail->next = head ;
+
         }
 
         return tdata ;
@@ -253,6 +278,9 @@ class LinkedList
 
             // data members
             head = newstart;
+
+            // cll
+            tail->next = head ;
 
         }
 
@@ -292,67 +320,9 @@ class LinkedList
             delete present ;
 
             // data members
-
-
             return tdata ;
 
         }
-    }
-
-    void reverse()
-    {
-        Node *prev = NULL ;
-        Node *curr = head ;
-
-        while(curr != NULL)
-        {
-            Node *ahead = curr -> next ;
-
-            curr -> next = prev ;
-
-            prev = curr ;
-            curr = ahead ;
-        }
-
-        // swap
-        Node *temp = head ;
-        head = tail ;
-        tail = temp ;
-        
-    }
-
-    int mid()
-    {
-        Node *slow = head ;
-        Node *fast = head ;
-
-        while(fast != NULL && fast->next != NULL)
-        {
-            slow = slow->next ;
-            fast = fast->next->next ;
-        }
-
-        return slow->data ;
-    }
-
-    int kthend(int k)
-    {
-        Node *slow = head ;
-        Node *fast = head ;
-
-        for(int i = 1 ; i <= k ; i++)
-        {
-            fast = fast->next ;
-        }
-
-        while(fast != NULL)
-        {
-            slow = slow->next ;
-            fast = fast->next ;
-        }
-
-        return slow->data ;
-
     }
 
 } ;
@@ -361,7 +331,7 @@ class LinkedList
 
 int main()
 {
-    LinkedList ll ;
+    CircularLinkedList ll ;
 
     ll.addLast(10) ;
     ll.addLast(20) ;
@@ -377,11 +347,8 @@ int main()
     ll.display() ;
     cout << ll.removeFirst() << endl ;
     ll.display() ;
-    // ll.removeAt(3) ;
+    ll.removeAt(3) ;
     ll.display() ;
-    ll.reverse() ;
-    ll.display() ;
-
-    cout << ll.mid() << endl ;
+    
 
 }
