@@ -26,6 +26,7 @@
         "cstring": "cpp",
         "ctime": "cpp",
         "cwchar": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "queue": "cpp"
     }
 }

@@ -2,7 +2,7 @@
 
 using namespace std ;
 
-class Heap
+class MaxHeap
 {
 
     int *arr ;
@@ -10,7 +10,7 @@ class Heap
 
     public :
 
-    Heap(int cap)
+    MaxHeap(int cap)
     {
         arr = new int[cap] ;
         size = 0 ;
@@ -28,7 +28,7 @@ class Heap
     {
         int pi = (ci-1)/2 ;
 
-        if(arr[pi] > arr[ci])
+        if(arr[pi] < arr[ci])
         {
             swap(pi, ci) ;
             upheapify(pi) ;
@@ -51,11 +51,48 @@ class Heap
         cout << endl ;
     }
 
+    int remove()
+    {
+        swap(0,size-1) ;
+        int temp = arr[size-1] ;
+        arr[size-1] = 0 ;
+        size -- ;
+
+        downheapify(0) ; 
+
+        return temp ;        
+    }
+
+    void downheapify(int pi)
+    {
+        int lci = 2*pi + 1 ;
+        int rci = 2*pi + 2 ;
+
+        int maxi = pi ;
+
+        if(lci < size && arr[maxi] < arr[lci])
+            maxi = lci ;
+        
+        if(rci < size && arr[maxi] < arr[rci])
+            maxi = rci ;
+
+        if(maxi != pi)
+        {
+            swap(maxi, pi) ;
+            downheapify(maxi) ;
+        }
+    }
+
+    int get()
+    {
+        return arr[0] ;
+    }
+
 } ;
 
 int main()
 {
-    Heap h(20) ;
+    MaxHeap h(20) ;
 
     h.add(10) ;
     h.add(30) ;
@@ -66,5 +103,11 @@ int main()
     h.add(5) ;
     h.display() ;
 
+    cout << h.remove() << endl;
+    h.display() ;
+    cout << h.remove() << endl;
+    h.display() ;
+
+    
     return 0 ;
 }
